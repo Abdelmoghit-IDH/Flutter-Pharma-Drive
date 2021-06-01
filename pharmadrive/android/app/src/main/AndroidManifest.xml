@@ -3,6 +3,8 @@
    <application
         android:label="pharmadrive"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyAj404z-k_lPBHAP339g0bokWIo7-uNw4Y"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

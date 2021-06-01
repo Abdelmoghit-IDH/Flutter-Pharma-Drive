@@ -24,9 +24,7 @@ PageController _controller = PageController(initialPage: 0, keepPage: false);
 
 void passerButtonTapped() {
   _controller.animateToPage(2,
-      duration: Duration(milliseconds: 200), curve: Curves.bounceIn);
-  // or this to jump to it without animating
-  _controller.jumpToPage(2);
+      duration: Duration(milliseconds: 500), curve: Curves.bounceIn);
 }
 
 class BodyBienvenueScreen extends StatefulWidget {
@@ -184,6 +182,7 @@ class MiddleWidgets extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class PasserButton extends StatefulWidget {
   PasserButton({
     Key key,
@@ -251,11 +250,12 @@ class _PasserButtonState extends State<PasserButton> {
 }
 
 class CommencerButton extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pushReplacementNamed(context, '/TrouverPharma');
+      },
       child: Container(
         width: SizeConfig.blockSizeHorizontal * 80,
         height: SizeConfig.blockSizeVertical * 10,

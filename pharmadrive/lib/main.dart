@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pharmadrive/Screens/Loading.dart';
 
 import 'Screens/Bienvenue.dart';
+import 'Screens/Home.dart';
 import 'Screens/TrouverPharma.dart';
 
 void main() {
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/':                (context) => Loading(),
         '/BienvenueScreen': (context) => BienvenueScreen(),
-        '/TrouverPharma' :  (context) => TrouverPharma(),
+        '/TrouverPharma'  : (context) => TrouverPharma(),
+        '/Home'           : (context) => Home(), 
       },
     );
   }

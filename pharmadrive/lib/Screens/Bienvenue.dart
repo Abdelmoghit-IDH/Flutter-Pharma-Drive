@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:pharmadrive/Global/SizeConfig.dart';
+import 'package:pharmadrive/Screens/Home.dart';
 
 class BienvenueScreen extends StatelessWidget {
   const BienvenueScreen({Key key}) : super(key: key);
@@ -161,7 +162,7 @@ class MiddleWidgets extends StatelessWidget {
           height: SizeConfig.blockSizeVertical,
         ),
         Text(
-          textBottom, //"Pharma'drive",
+          textBottom,
           style: TextStyle(
             fontFamily: "Rota",
             fontSize: SizeConfig.safeBlockHorizontal * 15,

@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import 'package:pharmadrive/Global/SizeConfig.dart';
-import 'package:pharmadrive/Screens/Home.dart';
 
 class BienvenueScreen extends StatelessWidget {
   const BienvenueScreen({Key key}) : super(key: key);
@@ -255,7 +254,7 @@ class CommencerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        Navigator.pushReplacementNamed(context, '/TrouverPharma');
+        Navigator.pushReplacementNamed(context, '/MainNvgApp');
       },
       child: Container(
         width: SizeConfig.blockSizeHorizontal * 80,

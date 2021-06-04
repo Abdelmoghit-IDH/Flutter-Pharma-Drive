@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pharmadrive/Global/SizeConfig.dart';
 
-
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
     Key key,
@@ -51,6 +50,15 @@ class CustomAppBar extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.white.withOpacity(0.4),
+                        spreadRadius: 4,
+                        blurRadius: 8,
+                        offset:
+                            Offset(0, 3), // Todo: changes position of shadow
+                      ),
+                    ],
                     image: DecorationImage(
                         image: ExactAssetImage('assets/images/profil.png'),
                         fit: BoxFit.fill),

@@ -1,24 +1,133 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pharmadrive/Global/SizeConfig.dart';
+import 'package:pharmadrive/Providers/dataCenter.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
   Home({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ClipPath(
-        clipper: WaveClipper(),
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          ClipPath(
+            clipper: WaveClipper(),
+            child: Container(
+              height: SizeConfig.safeBlockVertical * 40,
+              width: double.infinity,
+              color: Color(0xffff8000),
+              child: Stack(children: [
+                ProfilCircle(),
+                ImageManDelivery(),
+                TitleApp(),
+                TextScannerVOrdon(),
+              ]),
+            ),
+          ),
+          Column(
+            children: [
+              SizedBox(
+                height: SizeConfig.blockSizeVertical * 37,
+              ),
+              Center(
+                child: Container(
+                  height: SizeConfig.blockSizeVertical * 60,
+                  width: SizeConfig.blockSizeHorizontal * 95,
+                  color: Colors.white,
+                  child: ListView(
+                    children: [
+                      ComponentHome(
+                        title: "Trouvez un médicament",
+                        image: "assets/images/home/Pharma1.jpg",
+                      ),
+                      ComponentHome(
+                        title: "Pharmacies de garde",
+                        image: "assets/images/home/Pharma3.jpg",
+                      ),
+                      ComponentHome(
+                        title: "Trouvez un docteur",
+                        image: "assets/images/home/Pharma2.jpg",
+                      ),
+                      ComponentHome(
+                        title: "Trouvez un clinique",
+                        image: "assets/images/home/Pharma4.jpg",
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+// Todo: all widget used to build home page
+
+//***Tape***//
+
+class ComponentHome extends StatelessWidget {
+  ComponentHome({Key key, @required this.title, @required this.image})
+      : super(key: key);
+
+  final String title;
+  final String image;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      // ignore: deprecated_member_use
+      child: FlatButton(
+        onPressed: () {},
         child: Container(
-          height: SizeConfig.safeBlockVertical * 40,
-          width: double.infinity,
-          color: Color(0xffff8000),
-          child: Stack(children: [
-            ProfilCircle(),
-            ImageManDelivery(),
-            TitleApp(),
-            TextScannerVOrdon()
-          ]),
+          height: SizeConfig.safeBlockVertical * 25,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Color(0xffc8c7c6).withOpacity(0.2),
+                spreadRadius: 2,
+                blurRadius: 9,
+                offset: Offset(0, 3), // Todo: changes position of shadow
+              ),
+            ],
+          ),
+          child: Card(
+            color: Color(0xfff7e6dc),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusDirectional.circular(20),
+            ),
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  height: SizeConfig.safeBlockVertical * 18,
+                  child: Image.asset(
+                    image,
+                    fit: BoxFit.cover,
+                    width: double.maxFinite,
+                  ),
+                ),
+                Container(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontFamily: "Rota",
+                      fontWeight: FontWeight.bold,
+                      fontSize: SizeConfig.blockSizeHorizontal * 6,
+                      color: Color(0xffff8000),
+                    ),
+                  ),
+                ),
+                SizedBox()
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -113,32 +222,60 @@ class ImageManDelivery extends StatelessWidget {
 
 //***Widget Profil picture***//
 
+// ignore: must_be_immutable
 class ProfilCircle extends StatelessWidget {
-  const ProfilCircle({
+  ProfilCircle({
     Key key,
   }) : super(key: key);
 
+  //This value is used to center the drawer
+  final double middle = (SizeConfig.blockSizeVertical * 100 -
+          SizeConfig.blockSizeVertical * 100 * 0.75) /
+      2;
+
   @override
   Widget build(BuildContext context) {
+    double statusBarHeight = MediaQuery.of(context).padding.top;
+    DataCenter data = Provider.of<DataCenter>(context);
     return Column(
       children: [
         SizedBox(height: SizeConfig.blockSizeVertical * 5),
         Container(
-          width: SizeConfig.safeBlockHorizontal * 95,
+          width: double.infinity,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Container(
-                width: SizeConfig.safeBlockHorizontal * 13,
-                height: SizeConfig.safeBlockHorizontal * 13,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: ExactAssetImage('assets/images/profil.png'),
-                      fit: BoxFit.fill),
+              // ignore: deprecated_member_use
+              FlatButton(
+                shape: CircleBorder(),
+                padding: EdgeInsets.all(SizeConfig.safeBlockHorizontal * 1.5),
+                onPressed: () {
+                  //Todo: Show Drawer
+                  data.setXOffsite(SizeConfig.blockSizeHorizontal * 70);
+                  data.setYOffsite(middle + statusBarHeight / 2);
+                  data.setActiveNvg(false);
+                },
+                child: Container(
+                  width: SizeConfig.blockSizeHorizontal * 15,
+                  height: SizeConfig.blockSizeHorizontal * 15,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.white.withOpacity(0.3),
+                        spreadRadius: 4,
+                        blurRadius: 8,
+                        offset:
+                            Offset(0, 3), // Todo: changes position of shadow
+                      ),
+                    ],
+                    image: DecorationImage(
+                        image: ExactAssetImage('assets/images/profil.png'),
+                        fit: BoxFit.fill),
+                  ),
                 ),
-              ),
+              )
             ],
           ),
         ),
@@ -152,7 +289,7 @@ class ProfilCircle extends StatelessWidget {
 class WaveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    double radius = SizeConfig.blockSizeHorizontal * 12;
+    double radius = SizeConfig.blockSizeHorizontal * 11;
     var path = new Path()
       ..moveTo(0, 0)
       ..lineTo(size.width, 0)

@@ -1,0 +1,297 @@
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:pharmadrive/Global/SizeConfig.dart';
+
+class EditProfil extends StatefulWidget {
+  const EditProfil({Key key}) : super(key: key);
+
+  @override
+  _EditProfilState createState() => _EditProfilState();
+}
+
+enum Sexe { Homme, Femme }
+
+class _EditProfilState extends State<EditProfil> {
+  File _pickedImage1;
+  final picker = ImagePicker();
+  
+  Future getImage(ImageSource source) async {
+    final pickedFile = await ImagePicker.pickImage(source: source);
+
+    setState(() {
+      if (pickedFile != null) {
+        _pickedImage1 = File(pickedFile.path);
+      } else {
+        print("walo walo");
+      }
+    });
+  }
+
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  bool textFieldIsActive = false;
+
+  @override
+  Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return Scaffold(
+      backgroundColor: Color(0xffffa140),
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.96,
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ListTile(
+                leading: IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: Icon(
+                    Icons.arrow_back,
+                    size: SizeConfig.blockSizeHorizontal * 8,
+                  ),
+                  color: Color(0xff2b383a),
+                ),
+                title: Center(
+                  child: Text(
+                    "Editer le profil",
+                    style: TextStyle(
+                      fontFamily: "Rota",
+                      fontSize: SizeConfig.blockSizeHorizontal * 6,
+                      color: Color(0xff2b383a),
+                    ),
+                  ),
+                ),
+                trailing: Icon(null),
+              ),
+              Stack(children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                        SizeConfig.blockSizeVertical * 30),
+                    border: Border.all(color: Colors.black38, width: 3),
+                  ),
+                  child: CircleAvatar(
+                    backgroundImage:
+                        _pickedImage1 != null ? FileImage(_pickedImage1) : null,
+                    radius: width * 0.5 / 2,
+                    backgroundColor: Color(0x55ffffff),
+                    child: _pickedImage1 == null
+                        ? Container(
+                            width: SizeConfig.blockSizeHorizontal * 50,
+                            height: SizeConfig.blockSizeHorizontal * 50,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  image: ExactAssetImage(
+                                      'assets/images/profil.png'),
+                                  fit: BoxFit.fill),
+                            ),
+                          )
+                        : null,
+                  ),
+                ),
+                Container(
+                  width: SizeConfig.blockSizeHorizontal * 13,
+                  height: SizeConfig.blockSizeHorizontal * 13,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.white.withOpacity(0.2),
+                        spreadRadius: 4,
+                        blurRadius: 8,
+                        offset:
+                            Offset(0, 3), // Todo: changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: IconButton(
+                    onPressed: () {
+                      onClickAddPhoto();
+                    },
+                    icon: Icon(Icons.camera_alt),
+                  ),
+                ),
+              ]),
+              Container(
+                height: SizeConfig.blockSizeVertical * 35,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    CustumTestField(
+                      nameController: nameController,
+                      icon: Icons.person,
+                      labelText: "cloud & iot",
+                      hindText: "cloud & iot",
+                    ),
+                    CustumTestField(
+                      nameController: nameController,
+                      icon: Icons.email,
+                      labelText: "cloud.iot@gmail.com",
+                      hindText: "cloud.iot@gmail.com",
+                    ),
+                    CustumTestField(
+                      nameController: nameController,
+                      icon: Icons.vpn_key,
+                      labelText: "********",
+                      hindText: "********",
+                    ),
+                  ],
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Container(
+                  width: SizeConfig.blockSizeHorizontal * 80,
+                  height: SizeConfig.blockSizeVertical * 8,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.white.withOpacity(0.2),
+                        spreadRadius: 4,
+                        blurRadius: 8,
+                        offset:
+                            Offset(0, 3), // Todo: changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                      child: Text(
+                    "Confirmer la modification",
+                    style: TextStyle(
+                        fontSize: SizeConfig.blockSizeHorizontal * 6,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  )),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  onClickAddPhoto() {
+    var ad = AlertDialog(
+      title: Text(
+        "Choisir une photo",
+        style: TextStyle(
+            fontSize: SizeConfig.blockSizeHorizontal * 6,
+            fontFamily: 'Rota',
+            color: Color(0xff333b3d)),
+      ),
+      content: Container(
+        height: SizeConfig.blockSizeVertical * 20,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Divider(
+              color: Colors.black,
+            ),
+            Container(
+              width: SizeConfig.blockSizeHorizontal * 90,
+              color: Color(0x44ffa140),
+              child: ListTile(
+                leading: Icon(
+                  Icons.image,
+                  size: SizeConfig.blockSizeHorizontal * 6.5,
+                ),
+                title: Text(
+                  "Gallerie",
+                  style: TextStyle(
+                    fontFamily: 'Rota',
+                    color: Color(0xff333b3d),
+                    fontSize: SizeConfig.blockSizeHorizontal * 5,
+                  ),
+                ),
+                onTap: () {
+                  getImage(ImageSource.gallery);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
+            SizedBox(
+              height: SizeConfig.blockSizeVertical,
+            ),
+            Container(
+              color: Color(0x44ffa140),
+              child: ListTile(
+                leading: Icon(
+                  Icons.add_a_photo,
+                  size: SizeConfig.blockSizeHorizontal * 6.5,
+                ),
+                title: Text(
+                  "Caméra",
+                  style: TextStyle(
+                    fontFamily: 'Rota',
+                    color: Color(0xff333b3d),
+                    fontSize: SizeConfig.blockSizeHorizontal * 5,
+                  ),
+                ),
+                onTap: () {
+                  getImage(ImageSource.camera);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+    showDialog(context: context, builder: (BuildContext context) => ad);
+  }
+}
+
+class CustumTestField extends StatelessWidget {
+  CustumTestField({
+    @required this.icon,
+    Key key,
+    @required this.nameController,
+    @required this.hindText,
+    @required this.labelText,
+  }) : super(key: key);
+
+  //* Declaration
+  final IconData icon;
+  final String hindText, labelText;
+  final TextEditingController nameController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        right: SizeConfig.blockSizeHorizontal * 7.5,
+        left: SizeConfig.blockSizeHorizontal * 7.5,
+      ),
+      child: Theme(
+        data: ThemeData(
+          primaryColor: Color(0xff333b3d),
+        ),
+        child: TextField(
+          controller: nameController,
+          textCapitalization: TextCapitalization.words,
+          decoration: InputDecoration(
+            hintText: hindText,
+            labelText: labelText,
+            prefixIcon: Icon(icon),
+            hintStyle: TextStyle(color: Colors.grey),
+            filled: true,
+            fillColor: Color(0xffffbf80),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -148,7 +148,7 @@ class ListButtons extends StatelessWidget {
             data.setXOffsite(0);
             data.setYOffsite(0);
             data.setActiveNvg(true);
-            Navigator.pushNamed(context, "/SignUp");
+            Navigator.pushNamed(context, "/EditProfil");
           },
         ),
         ComponantDrawer(

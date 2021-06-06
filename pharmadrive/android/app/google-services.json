@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "838749022744",
+    "project_id": "pharmadrive-588c8",
+    "storage_bucket": "pharmadrive-588c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838749022744:android:b94cc33e69b6e0f496316d",
+        "android_client_info": {
+          "package_name": "com.cloudppps2.pharmadrive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "838749022744-elh24etkt7qm5f1o0jfccvdk702rd550.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6LaGhuPX-I32-ZFJd5B2W_4sFUZQYMRM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "838749022744-elh24etkt7qm5f1o0jfccvdk702rd550.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838749022744:android:942662da2b57339596316d",
+        "android_client_info": {
+          "package_name": "com.example.pharmadrive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "838749022744-elh24etkt7qm5f1o0jfccvdk702rd550.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6LaGhuPX-I32-ZFJd5B2W_4sFUZQYMRM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "838749022744-elh24etkt7qm5f1o0jfccvdk702rd550.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

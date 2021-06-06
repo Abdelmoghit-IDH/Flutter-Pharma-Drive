@@ -42,6 +42,8 @@ class Home extends StatelessWidget {
                       ComponentHome(
                         title: "Trouvez un médicament",
                         image: "assets/images/home/Pharma1.jpg",
+                        function: () =>
+                            Navigator.pushNamed(context, "/FindMedicament"),
                       ),
                       ComponentHome(
                         title: "Pharmacies de garde",
@@ -72,18 +74,23 @@ class Home extends StatelessWidget {
 //***Tape***//
 
 class ComponentHome extends StatelessWidget {
-  ComponentHome({Key key, @required this.title, @required this.image})
-      : super(key: key);
+  ComponentHome({
+    Key key,
+    @required this.title,
+    @required this.image,
+    this.function,
+  }) : super(key: key);
 
   final String title;
   final String image;
+  final Function function;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       // ignore: deprecated_member_use
       child: FlatButton(
-        onPressed: () {},
+        onPressed: function,
         child: Container(
           height: SizeConfig.safeBlockVertical * 25,
           decoration: BoxDecoration(
@@ -92,7 +99,7 @@ class ComponentHome extends StatelessWidget {
                 color: Color(0xffc8c7c6).withOpacity(0.2),
                 spreadRadius: 2,
                 blurRadius: 9,
-                offset: Offset(0, 3), // Todo: changes position of shadow
+                offset: Offset(0, 3),
               ),
             ],
           ),
@@ -266,8 +273,7 @@ class ProfilCircle extends StatelessWidget {
                         color: Colors.white.withOpacity(0.3),
                         spreadRadius: 4,
                         blurRadius: 8,
-                        offset:
-                            Offset(0, 3), // Todo: changes position of shadow
+                        offset: Offset(0, 3),
                       ),
                     ],
                     image: DecorationImage(

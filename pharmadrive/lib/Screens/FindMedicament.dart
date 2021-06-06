@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pharmadrive/Global/SizeConfig.dart';
 import 'package:pharmadrive/model/Drugs.dart';
-import 'package:pharmadrive/repository/dataRepository.dart';
 
 class FindMedicament extends StatefulWidget {
   FindMedicament({Key key}) : super(key: key);
@@ -13,16 +12,16 @@ class FindMedicament extends StatefulWidget {
 }
 
 class _FindMedicamentState extends State<FindMedicament> {
-  final DataRepository repository = DataRepository();
-
   //***on ajoute cette valeur pour controler la barre de recherche***//
   TextEditingController _searchController = TextEditingController();
 
+  //***declaration des list utilisée pour faire la recherche***//
   List _allResult = [];
   List _resultList = [];
   // ignore: unused_field
   Future _resultLoaded;
 
+  //***fonction pour avoir les medicament depuis firebase***//
   getMedicamentStreamSnapshots() async {
     // ignore: deprecated_member_use
     var data = await Firestore.instance.collection('Drugs').getDocuments();
@@ -31,28 +30,30 @@ class _FindMedicamentState extends State<FindMedicament> {
       _allResult = data.documents;
     });
     searchResultsList();
-    return 'Complete';
+    return 'Tous le données sont prés à utilisée';
   }
 
+  //***Filtrer le resultat on se basant sur ce qui ecrit l user***//
   searchResultsList() {
     var showResult = [];
 
+    //**User il cherche something**/
     if (_searchController.text != '') {
-      //**User il cherche something**/
       for (var medicamentSnapShot in _allResult) {
         final medicamentName =
             Drug.fromSnapshot(medicamentSnapShot).drugName.toLowerCase();
         if (medicamentName.contains(_searchController.text.toLowerCase())) {
-          showResult.add(medicamentName);
+          showResult.add(medicamentSnapShot);
         }
       }
-    } else {
-      //**si controller.text='' vide on va afficher tous le resultat**/
+    }
+    //**si controller.text='' vide on va afficher tous le resultat**/
+    else {
       showResult = List.from(_allResult);
     }
 
     setState(() {
-      _resultList = _allResult;
+      _resultList = showResult;
     });
   }
 
@@ -76,7 +77,7 @@ class _FindMedicamentState extends State<FindMedicament> {
 
   @override
   void dispose() {
-    //***Effacer la valeur quand l'utilisateur efface dans TextField***/
+    //***Effacer TextField lorsque l'utilisateur commence à effacer***/
     super.dispose();
     _searchController.removeListener(_onSearchChange);
     _searchController.dispose();
@@ -84,104 +85,225 @@ class _FindMedicamentState extends State<FindMedicament> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          body: Container(
-        width: SizeConfig.blockSizeHorizontal * 100,
-        height: SizeConfig.blockSizeVertical * 100,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: TextField(
-                controller: _searchController,
-                decoration: InputDecoration(prefix: Icon(Icons.search)),
-              ),
-            ),
-            Container(
-              height: SizeConfig.blockSizeVertical * 70,
-              child: ListView.builder(
-                itemCount: _resultList.length,
-                itemBuilder: (BuildContext context, int index) =>
-                    _custumDrug(context, _resultList[index]),
-              ),
-            ),
-          ],
-        ),
-      )),
+    return Scaffold(
+        backgroundColor: Colors.orange[100],
+        body: Stack(children: [
+          MedicamentSearch(
+              searchController: _searchController, resultList: _resultList),
+          NumberOfProducts(resultList: _resultList),
+        ]));
+  }
+}
+
+// Todo: Stack Elements
+
+class NumberOfProducts extends StatelessWidget {
+  const NumberOfProducts({
+    Key key,
+    @required List resultList,
+  })  : _resultList = resultList,
+        super(key: key);
+
+  final List _resultList;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        children: [
+          SizedBox(
+            height: SizeConfig.blockSizeVertical * 17,
+          ),
+          Text("${_resultList.length} Products",
+              style: TextStyle(
+                fontSize: SizeConfig.blockSizeHorizontal * 5,
+                fontWeight: FontWeight.bold,
+              )),
+        ],
+      ),
     );
   }
 }
 
-Widget _custumDrug(BuildContext context, DocumentSnapshot document) {
-  final drug = Drug.fromSnapshot(document);
+class MedicamentSearch extends StatelessWidget {
+  const MedicamentSearch({
+    Key key,
+    @required TextEditingController searchController,
+    @required List resultList,
+  })  : _searchController = searchController,
+        _resultList = resultList,
+        super(key: key);
 
-  return Container(
-    child: Card(
-      child: InkWell(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0, bottom: 4.0),
-                child: Row(children: <Widget>[
-                  Text(
-                    drug.drugName,
-                    style: TextStyle(fontSize: 23),
+  final TextEditingController _searchController;
+  final List _resultList;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: SizeConfig.blockSizeVertical * 3),
+            Container(
+              height: SizeConfig.blockSizeVertical * 20,
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: Icon(
+                        Icons.arrow_back,
+                        size: SizeConfig.blockSizeHorizontal * 8,
+                      ),
+                      color: Color(0xff2b383a),
+                    ),
+                    title: Center(
+                      child: Text(
+                        "Trouver un médicament",
+                        style: TextStyle(
+                          fontFamily: "Rota",
+                          fontSize: SizeConfig.blockSizeHorizontal * 6,
+                          color: Color(0xff2b383a),
+                        ),
+                      ),
+                    ),
+                    trailing: Icon(null),
                   ),
-                  Spacer(),
-                ]),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Container(
+                      height: SizeConfig.blockSizeVertical * 6,
+                      child: CupertinoSearchTextField(
+                        itemSize: SizeConfig.blockSizeHorizontal * 8,
+                        controller: _searchController,
+                        style: TextStyle(
+                          fontSize: SizeConfig.blockSizeHorizontal * 5,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
+            Container(
+              height: SizeConfig.blockSizeVertical * 75,
+              child: ListView.builder(
+                itemCount: _resultList.length,
+                itemBuilder: (BuildContext context, int index) =>
+                    _custumWidgetDrug(context, _resultList[index]),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// Todo: fin Stack Elements
+
+// Todo: Reasuble widget design medicament
+
+Widget _custumWidgetDrug(BuildContext context, DocumentSnapshot document) {
+  final drug = Drug.fromSnapshot(document);
+  return Padding(
+    padding: const EdgeInsets.only(left: 10, right: 10, bottom: 8),
+    child: Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.white.withOpacity(0.2),
+            spreadRadius: 4,
+            blurRadius: 8,
+            offset: Offset(0, 4),
           ),
+        ],
+      ),
+      width: SizeConfig.blockSizeHorizontal * 100,
+      height: SizeConfig.blockSizeVertical * 20,
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        color: Colors.white,
+        child: InkWell(
+          child: Row(children: <Widget>[
+            Container(
+              height: SizeConfig.blockSizeVertical * 20,
+              width: SizeConfig.blockSizeHorizontal * 35,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  drug.urlImage,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            SizedBox(
+              width: SizeConfig.blockSizeHorizontal * 2.5,
+            ),
+            Container(
+              width: SizeConfig.blockSizeHorizontal * 50,
+              child: IntrinsicWidth(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Text(
+                      drug.drugName,
+                      style: TextStyle(
+                        fontSize: SizeConfig.blockSizeHorizontal * 7,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      drug.description == null ? "null" : drug.description,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: SizeConfig.blockSizeHorizontal * 3,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${drug.price} MAD',
+                          style: TextStyle(
+                            fontSize: SizeConfig.blockSizeHorizontal * 5,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        // ignore: deprecated_member_use
+                        Container(
+                          width: SizeConfig.blockSizeHorizontal * 20,
+                          // ignore: deprecated_member_use
+                          child: FlatButton(
+                            color: Color(0xffff8000),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(28.0),
+                            ),
+                            onPressed: () {},
+                            child: Text(
+                              "Acheter",
+                              style: TextStyle(
+                                fontSize: SizeConfig.blockSizeHorizontal * 3,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ]),
         ),
       ),
     ),
   );
 }
-
-
-
-/*
-StreamBuilder<QuerySnapshot>(
-              stream: repository.getStream(),
-              builder: (context, snapshot) {
-                return (snapshot.connectionState == ConnectionState.waiting)
-                    ? Center(child: CircularProgressIndicator())
-                    : ListView.builder(
-                        // ignore: deprecated_member_use
-                        itemCount: snapshot.data.documents.length,
-                        itemBuilder: (context, index) {
-                          // ignore: deprecated_member_use
-                          DocumentSnapshot data =
-                              // ignore: deprecated_member_use
-                              snapshot.data.documents[index];
-                          return Card(
-                            child: Row(
-                              children: <Widget>[
-                                Image.network(
-                                  data['urlImage'],
-                                  width: 150,
-                                  height: 100,
-                                  fit: BoxFit.fill,
-                                ),
-                                SizedBox(
-                                  width: 25,
-                                ),
-                                Text(
-                                  data['drugName'],
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      );
-              }),
-
-
-*/

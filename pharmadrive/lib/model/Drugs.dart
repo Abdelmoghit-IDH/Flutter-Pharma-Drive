@@ -56,4 +56,6 @@ Drug _drugFromJson(Map<dynamic, dynamic> json) {
 Map<String, dynamic> _drugToJson(Drug instance) => <String, dynamic>{
       'drugName': instance.drugName,
       'urlImage': instance.urlImage,
+      'description':instance.description,
+      'price':instance.price,
     };

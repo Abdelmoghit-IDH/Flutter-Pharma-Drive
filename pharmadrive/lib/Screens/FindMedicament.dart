@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:pharmadrive/Global/SizeConfig.dart';
 import 'package:pharmadrive/model/Drugs.dart';
+import 'AddDrugs.dart';
+
 
 class FindMedicament extends StatefulWidget {
   FindMedicament({Key key}) : super(key: key);
@@ -255,7 +258,7 @@ Widget _custumWidgetDrug(BuildContext context, DocumentSnapshot document) {
                     Text(
                       drug.drugName,
                       style: TextStyle(
-                        fontSize: SizeConfig.blockSizeHorizontal * 7,
+                        fontSize: drug.drugName.length>13 ? SizeConfig.blockSizeHorizontal * 5:SizeConfig.blockSizeHorizontal * 7,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -286,7 +289,12 @@ Widget _custumWidgetDrug(BuildContext context, DocumentSnapshot document) {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(28.0),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => AddDrugs()),
+                              );
+                            },
                             child: Text(
                               "Acheter",
                               style: TextStyle(

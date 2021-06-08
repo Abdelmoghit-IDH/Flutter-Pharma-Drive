@@ -9,6 +9,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DataCenter data = Provider.of<DataCenter>(context);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -277,7 +279,10 @@ class ProfilCircle extends StatelessWidget {
                       ),
                     ],
                     image: DecorationImage(
-                        image: ExactAssetImage('assets/images/profil.png'),
+                        //image: ExactAssetImage('assets/images/profil.png'),
+                        image: data.utilisateurConnecte.imageUrl == null
+                            ? ExactAssetImage('assets/images/profil.png')
+                            : NetworkImage(data.utilisateurConnecte.imageUrl),
                         fit: BoxFit.fill),
                   ),
                 ),

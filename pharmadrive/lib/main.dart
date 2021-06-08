@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmadrive/Screens/Loading.dart';
+import 'package:pharmadrive/Screens/logIn.dart';
+import 'package:pharmadrive/Screens/signUp.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'Providers/dataCenter.dart';
@@ -24,12 +26,14 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
         routes: {
-          '/':                (context) => Loading(),
+          '/': (context) => Loading(),
           '/BienvenueScreen': (context) => BienvenueScreen(),
-          '/MainNvgApp':      (context) => MainNvgApp(),
+          '/signIn': (context) => LogIn(),
+          '/signUp': (context) => SignUp(),
+          '/MainNvgApp': (context) => MainNvgApp(),
           '/StackProfilHome': (context) => StackProfilHome(),
-          '/EditProfil':      (context) => EditProfil(),
-          '/FindMedicament':  (context) => FindMedicament(),
+          '/EditProfil': (context) => EditProfil(),
+          '/FindMedicament': (context) => FindMedicament(),
         },
       ),
     );

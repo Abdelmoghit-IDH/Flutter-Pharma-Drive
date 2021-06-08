@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pharmadrive/model/user.dart';
 
 class DataCenter extends ChangeNotifier {
   //***Initiale values of X,Y,Z axes***//
@@ -55,4 +56,7 @@ class DataCenter extends ChangeNotifier {
   getYOffsite() {
     return yOffsite;
   }
+
+  //.........................USER...........................................
+  WholeUserModel utilisateurConnecte;
 }

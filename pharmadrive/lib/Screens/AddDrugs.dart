@@ -6,11 +6,10 @@ import 'package:flutter/material.dart';
 List listImage=[];
 List list = [];
 
-// ignore: must_be_immutable
 class AddDrugs extends StatelessWidget {
   AddDrugs({Key key}) : super(key: key);
 
-  List<Map<String, dynamic>> listDrug = [];
+  final List<Map<String, dynamic>> listDrug = [];
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,7 @@ class AddDrugs extends StatelessWidget {
 
                     collection
                         .doc()
-                        .set(listDrug[i]) // <-- Your data
+                        .set(listDrug[i])
                         .then((_) => print('Added'))
                         .catchError((error) => print('Add failed: $error'));
                   }

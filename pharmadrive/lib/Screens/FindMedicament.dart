@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:pharmadrive/Global/SizeConfig.dart';
 import 'package:pharmadrive/model/Drugs.dart';
 import 'AddDrugs.dart';
-
+import 'DrugDescription.dart';
 
 class FindMedicament extends StatefulWidget {
   FindMedicament({Key key}) : super(key: key);
@@ -22,15 +22,13 @@ class _FindMedicamentState extends State<FindMedicament> {
   List _allResult = [];
   List _resultList = [];
   // ignore: unused_field
-  Future _resultLoaded;
+  Future _resultLoaded; //Todo:This value is used don't remove it !!
 
   //***fonction pour avoir les medicament depuis firebase***//
   getMedicamentStreamSnapshots() async {
-    // ignore: deprecated_member_use
-    var data = await Firestore.instance.collection('Drugs').getDocuments();
+    var data = await FirebaseFirestore.instance.collection('Drugs').get();
     setState(() {
-      // ignore: deprecated_member_use
-      _allResult = data.documents;
+      _allResult = data.docs;
     });
     searchResultsList();
     return 'Tous le données sont prés à utilisée';
@@ -233,6 +231,17 @@ Widget _custumWidgetDrug(BuildContext context, DocumentSnapshot document) {
         ),
         color: Colors.white,
         child: InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DrugDescription(
+                nameDrug: drug.drugName,
+                urlImage: drug.urlImage,
+                description: drug.description,
+                price:drug.price,
+              )),
+            );
+          },
           child: Row(children: <Widget>[
             Container(
               height: SizeConfig.blockSizeVertical * 20,
@@ -258,7 +267,9 @@ Widget _custumWidgetDrug(BuildContext context, DocumentSnapshot document) {
                     Text(
                       drug.drugName,
                       style: TextStyle(
-                        fontSize: drug.drugName.length>13 ? SizeConfig.blockSizeHorizontal * 5:SizeConfig.blockSizeHorizontal * 7,
+                        fontSize: drug.drugName.length > 13
+                            ? SizeConfig.blockSizeHorizontal * 5
+                            : SizeConfig.blockSizeHorizontal * 7,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -280,19 +291,22 @@ Widget _custumWidgetDrug(BuildContext context, DocumentSnapshot document) {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        // ignore: deprecated_member_use
                         Container(
                           width: SizeConfig.blockSizeHorizontal * 20,
-                          // ignore: deprecated_member_use
-                          child: FlatButton(
-                            color: Color(0xffff8000),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(28.0),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: Colors.white,
+                              backgroundColor: Color(0xffff8000),
+                              onSurface: Colors.grey,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(28.0),
+                              ),
                             ),
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => AddDrugs()),
+                                MaterialPageRoute(
+                                    builder: (context) => AddDrugs()),
                               );
                             },
                             child: Text(

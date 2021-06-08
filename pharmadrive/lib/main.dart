@@ -25,13 +25,13 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
         routes: {
-          '/': (context) => Loading(),
+          '/':                (context) => Loading(),
           '/BienvenueScreen': (context) => BienvenueScreen(),
-          '/MainNvgApp': (context) => MainNvgApp(),
+          '/MainNvgApp':      (context) => MainNvgApp(),
           '/StackProfilHome': (context) => StackProfilHome(),
-          '/ProfilEditing': (context) => ProfilEditing(),
-          '/EditProfil': (context) => EditProfil(),
-          '/FindMedicament': (context) => FindMedicament(),
+          '/ProfilEditing':   (context) => ProfilEditing(),
+          '/EditProfil':      (context) => EditProfil(),
+          '/FindMedicament':  (context) => FindMedicament(),
         },
       ),
     );

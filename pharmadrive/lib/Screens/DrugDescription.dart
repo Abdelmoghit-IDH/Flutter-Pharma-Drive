@@ -343,6 +343,8 @@ class _WidgetAddItemState extends State<WidgetAddItem> {
   }
 }
 
+//***cette fontcion des utilisée pour reduire la taille d'un text ***//
+
 String adaptiveTitle(String name) {
   List<String> nm;
   if (name.length <= 30 && name.length >= 17) {
@@ -352,6 +354,8 @@ String adaptiveTitle(String name) {
     return name;
   }
 }
+
+//***cette fontcion des utilisée pour reduire la fontSize d'un text ***//
 
 double adaptiveFontSize(String name) {
   if (name.length >= 16) {

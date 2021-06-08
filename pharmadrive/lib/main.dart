@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pharmadrive/Screens/Loading.dart';
-import 'package:pharmadrive/Utiles/Drawer%20Elements/subScreensDrawer/ProfilEditing.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'Providers/dataCenter.dart';
 import 'Screens/Bienvenue.dart';
-import 'Screens/EditProfil.dart';
 import 'Screens/FindMedicament.dart';
 import 'Screens/MainNvgApp.dart';
 import 'Screens/StackProfilHome.dart';
+import 'Utiles/Drawer Elements/subScreensDrawer/EditProfil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +28,6 @@ class MyApp extends StatelessWidget {
           '/BienvenueScreen': (context) => BienvenueScreen(),
           '/MainNvgApp':      (context) => MainNvgApp(),
           '/StackProfilHome': (context) => StackProfilHome(),
-          '/ProfilEditing':   (context) => ProfilEditing(),
           '/EditProfil':      (context) => EditProfil(),
           '/FindMedicament':  (context) => FindMedicament(),
         },

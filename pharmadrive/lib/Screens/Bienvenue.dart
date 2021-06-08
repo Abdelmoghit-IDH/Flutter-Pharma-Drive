@@ -254,7 +254,7 @@ class CommencerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        Navigator.pushReplacementNamed(context, '/StackProfilHome');
+        Navigator.pushReplacementNamed(context, '/signIn');
       },
       child: Container(
         width: SizeConfig.blockSizeHorizontal * 80,

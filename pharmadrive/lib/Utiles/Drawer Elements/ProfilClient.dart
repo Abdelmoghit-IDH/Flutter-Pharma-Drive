@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmadrive/Global/SizeConfig.dart';
 import 'package:pharmadrive/Providers/dataCenter.dart';
+import 'package:pharmadrive/services/auth.dart';
 import 'package:provider/provider.dart';
 
 class ProfilClient extends StatelessWidget {
@@ -33,10 +34,16 @@ class LogOutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DataCenter data = Provider.of<DataCenter>(context);
+
     return ComponantDrawer(
       icon: Icons.logout,
       title: "Se deconnecter",
-      fonction: () {},
+      fonction: () async {
+        AuthController authController;
+        await authController.signOutUser();
+        Navigator.pushReplacementNamed(context, '/signIn');
+      },
     );
   }
 }

@@ -70,7 +70,7 @@ class _EditProfilState extends State<EditProfil> {
                   style: TextStyle(
                     fontFamily: "Rota",
                     fontSize:
-                        SizeConfig.blockSizeHorizontal * 6, //TODO a suivre
+                        SizeConfig.blockSizeHorizontal * 6, 
                     color: Color(0xff2b383a),
                   ),
                 ),
@@ -141,7 +141,7 @@ class _EditProfilState extends State<EditProfil> {
                     row("sexe",
                         userFirebase.estHomme == true ? "Homme" : "Femme"),
                     row("Mot de passe", "******"),
-                    //TODO mon widget
+                    
                   ],
                 ),
               ),

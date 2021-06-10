@@ -9,7 +9,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DataCenter data = Provider.of<DataCenter>(context);
 
     return Scaffold(
       backgroundColor: Colors.white,

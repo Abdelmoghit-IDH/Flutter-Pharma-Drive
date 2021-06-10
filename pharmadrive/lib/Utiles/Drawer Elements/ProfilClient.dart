@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmadrive/Global/SizeConfig.dart';
 import 'package:pharmadrive/Providers/dataCenter.dart';
+import 'package:pharmadrive/Screens/Basket.dart';
 import 'package:pharmadrive/services/auth.dart';
 import 'package:provider/provider.dart';
 
@@ -34,8 +35,6 @@ class LogOutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DataCenter data = Provider.of<DataCenter>(context);
-
     return ComponantDrawer(
       icon: Icons.logout,
       title: "Se deconnecter",
@@ -66,7 +65,6 @@ class ListButtons extends StatelessWidget {
     Lorem Ipsum Lorem Ipsum
     Lorem Ipsum Lorem Ipsum
   """;
-
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +160,18 @@ class ListButtons extends StatelessWidget {
         ComponantDrawer(
           icon: Icons.add_shopping_cart_rounded,
           title: "Mes commandes",
-          fonction: () {},
+          fonction: () {
+            data.setXOffsite(0);
+            data.setYOffsite(0);
+            data.setActiveNvg(true);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Basket(
+                listItems: data.getItems(),
+                listStateInfos: data.listPrices,
+              )),
+            );
+          },
         ),
         ComponantDrawer(
           icon: Icons.assignment,

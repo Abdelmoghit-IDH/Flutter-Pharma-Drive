@@ -18,7 +18,7 @@ class AuthController {
       };
     } catch (error) {
       print("nonnnnnnnnnnnnnnnnnnnn");
-      print(error.message.toString()); //TODO
+      print(error.message.toString()); 
       return {
         'status': 400,
         'error': error.message.toString(),
@@ -44,7 +44,7 @@ class AuthController {
       };
     } catch (error) {
       print("nonnnnnnnnnnnnnnnnnnnn");
-      print(error.message.toString()); //TODO
+      print(error.message.toString()); 
       return {
         'status': 400,
         'error': error.message.toString(),

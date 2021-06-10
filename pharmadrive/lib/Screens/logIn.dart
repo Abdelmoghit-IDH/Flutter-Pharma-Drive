@@ -135,27 +135,7 @@ class _LogInState extends State<LogIn> {
                   ),
                   TextButton(
                       onPressed: () async {
-                        //TODO
-
-                        /*toggleSpinner();
-                        UserModel thisUser = UserModel(
-                            emailController.text.trim(),
-                            passwordController.text);
-                        var response =
-                            await _authController.signInUser(thisUser);
-                        if (response['status'] == 200) {
-                          clearFields();
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Home()));
-                        } else {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(new SnackBar(
-                            content: Text(response['error']),
-                            duration: new Duration(seconds: 5),
-                          ));
-                        }
-                        toggleSpinner();*/
-
+                        
                         if (emailController.text.compareTo("") == 0) {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(new SnackBar(

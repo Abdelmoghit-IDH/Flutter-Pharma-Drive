@@ -73,7 +73,6 @@ class _DrugDescriptionState extends State<DrugDescription> {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      WidgetAddItem()
                     ],
                   ),
                   Text('${widget.price.toString()} MAD',
@@ -132,7 +131,7 @@ class _DrugDescriptionState extends State<DrugDescription> {
                         ),
                         onPressed: () {},
                         child: Text(
-                          "Acheter",
+                          "Ajouter au panier",
                           style: TextStyle(
                             fontSize: SizeConfig.blockSizeHorizontal * 7,
                           ),

@@ -3,8 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pharmadrive/Global/SizeConfig.dart';
+import 'package:pharmadrive/Providers/dataCenter.dart';
 import 'package:pharmadrive/model/Drugs.dart';
-import 'AddDrugs.dart';
+import 'package:provider/provider.dart';
 import 'DrugDescription.dart';
 
 class FindMedicament extends StatefulWidget {
@@ -210,6 +211,7 @@ class MedicamentSearch extends StatelessWidget {
 
 Widget _custumWidgetDrug(BuildContext context, DocumentSnapshot document) {
   final drug = Drug.fromSnapshot(document);
+  DataCenter data = Provider.of<DataCenter>(context);
   return Padding(
     padding: const EdgeInsets.only(left: 10, right: 10, bottom: 8),
     child: Container(
@@ -234,12 +236,13 @@ Widget _custumWidgetDrug(BuildContext context, DocumentSnapshot document) {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => DrugDescription(
-                nameDrug: drug.drugName,
-                urlImage: drug.urlImage,
-                description: drug.description,
-                price:drug.price,
-              )),
+              MaterialPageRoute(
+                  builder: (context) => DrugDescription(
+                        nameDrug: drug.drugName,
+                        urlImage: drug.urlImage,
+                        description: drug.description,
+                        price: drug.price,
+                      )),
             );
           },
           child: Row(children: <Widget>[
@@ -292,7 +295,8 @@ Widget _custumWidgetDrug(BuildContext context, DocumentSnapshot document) {
                           ),
                         ),
                         Container(
-                          width: SizeConfig.blockSizeHorizontal * 20,
+                          width: SizeConfig.blockSizeHorizontal * 10,
+                          height: SizeConfig.blockSizeHorizontal * 10,
                           child: TextButton(
                             style: TextButton.styleFrom(
                               primary: Colors.white,
@@ -303,16 +307,20 @@ Widget _custumWidgetDrug(BuildContext context, DocumentSnapshot document) {
                               ),
                             ),
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AddDrugs()),
+                              data.setItem(
+                                drug.drugName,
+                                drug.urlImage,
+                                drug.price,
+                                data.listPrices.length,
                               );
+                              data.setListPrice(0);
+                              data.setNbrSelectedDrug();
+                              print("the item was added !!");
                             },
                             child: Text(
-                              "Acheter",
+                              "+",
                               style: TextStyle(
-                                fontSize: SizeConfig.blockSizeHorizontal * 3,
+                                fontSize: SizeConfig.blockSizeHorizontal * 5,
                               ),
                             ),
                           ),

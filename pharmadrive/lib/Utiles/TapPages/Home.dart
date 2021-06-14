@@ -9,6 +9,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DataCenter data = Provider.of<DataCenter>(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -40,6 +41,14 @@ class Home extends StatelessWidget {
                   color: Colors.white,
                   child: ListView(
                     children: [
+                      data.utilisateurConnecte.aPharma == false
+                          ? SizedBox()
+                          : ComponentHome(
+                              title: "Gérer mon stock",
+                              image: "assets/images/home/stock.jpg",
+                              function: () =>
+                                  Navigator.pushNamed(context, "/monStock"),
+                            ),
                       ComponentHome(
                         title: "Trouvez un médicament",
                         image: "assets/images/home/Pharma1.jpg",
@@ -49,6 +58,8 @@ class Home extends StatelessWidget {
                       ComponentHome(
                         title: "Pharmacies de garde",
                         image: "assets/images/home/Pharma3.jpg",
+                        function: () =>
+                            Navigator.pushNamed(context, "/pharmaGarde"),
                       ),
                       ComponentHome(
                         title: "Trouvez un docteur",

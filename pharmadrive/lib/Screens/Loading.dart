@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pharmadrive/Global/SizeConfig.dart';
+import 'package:pharmadrive/Providers/dataCenter.dart';
+import 'package:pharmadrive/Utiles/TapPages/MapPharma.dart';
+import 'package:provider/provider.dart';
 
 //the goal of this screen is to show the logo of the app when
 //the user opens the app
@@ -15,6 +18,8 @@ class _SplashScreenState extends State<Loading> {
   void initState() {
     super.initState();
     startTime();
+    DataCenter data = Provider.of<DataCenter>(context, listen: false);
+    getPharmacies(data);
   }
 
   startTime() async {

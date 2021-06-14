@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pharmadrive/Screens/Loading.dart';
+import 'package:pharmadrive/Screens/createPharma.dart';
 import 'package:pharmadrive/Screens/logIn.dart';
+import 'package:pharmadrive/Screens/monStock.dart';
 import 'package:pharmadrive/Screens/signUp.dart';
+import 'package:pharmadrive/Screens/justificatif.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'Providers/dataCenter.dart';
@@ -9,6 +12,7 @@ import 'Screens/Bienvenue.dart';
 import 'Screens/FindMedicament.dart';
 import 'Screens/MainNvgApp.dart';
 import 'Screens/StackProfilHome.dart';
+import 'Screens/pharmacieDeGuarde.dart';
 import 'Utiles/Drawer Elements/subScreensDrawer/EditProfil.dart';
 
 void main() async {
@@ -34,6 +38,10 @@ class MyApp extends StatelessWidget {
           '/StackProfilHome': (context) => StackProfilHome(),
           '/EditProfil': (context) => EditProfil(),
           '/FindMedicament': (context) => FindMedicament(),
+          '/pharmaGarde': (context) => PharmacieDeGuarde(),
+          '/createPharma': (context) => CreatePharma(),
+          '/Justificatif': (context) => Justificatif(),
+          '/monStock': (context) => MonStock(),
         },
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmadrive/Screens/Basket.dart';
 import 'package:pharmadrive/model/user.dart';
+import 'package:pharmadrive/model/pharma.dart';
 
 class DataCenter extends ChangeNotifier {
   List<SelectedItem> listItems = [];
@@ -130,4 +131,8 @@ class DataCenter extends ChangeNotifier {
 
   //.........................USER...........................................
   WholeUserModel utilisateurConnecte;
+  //.........................USER...........................................
+  Pharmacie pharmaConnecte;
+  //.........................USER...........................................
+  List<Pharmacie> listPharmacies;
 }

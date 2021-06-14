@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:pharmadrive/Providers/dataCenter.dart';
+import 'package:pharmadrive/model/pharma.dart';
 import 'package:pharmadrive/model/user.dart';
 import 'package:pharmadrive/services/auth.dart';
 import 'package:provider/provider.dart';
@@ -135,7 +136,6 @@ class _LogInState extends State<LogIn> {
                   ),
                   TextButton(
                       onPressed: () async {
-                        
                         if (emailController.text.compareTo("") == 0) {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(new SnackBar(
@@ -158,17 +158,28 @@ class _LogInState extends State<LogIn> {
                                 await _authController.signInUser(userAuth);
                             if (response['status'] == 200) {
                               WholeUserModel utilisateurConnecte;
-                              DocumentReference<Map<String, dynamic>> doc =
-                                  FirebaseFirestore.instance
-                                      .collection("utilisateur")
-                                      .doc(response['userUid']);
+                              var doc = FirebaseFirestore.instance
+                                  .collection("utilisateur")
+                                  .doc(response['userUid']);
                               await doc.get().then((doc) {
-                                print("teeeeeeeeeeeeeeeeeeeeeeeeeeeeset");
+                                print("teeeeeeeeeeeeeeeeeeeeeeeeeeeeset1");
                                 print(doc.data());
                                 utilisateurConnecte =
                                     toWholeUserModel(doc.data());
                               });
                               data.utilisateurConnecte = utilisateurConnecte;
+                              if (utilisateurConnecte.aPharma) {
+                                Pharmacie pharmaConnecte;
+                                var doc = FirebaseFirestore.instance
+                                    .collection("pharmacie")
+                                    .doc(response['userUid']);
+                                await doc.get().then((doc) {
+                                  print("teeeeeeeeeeeeeeeeeeeeeeeeeeeeset2");
+                                  print(doc.data());
+                                  pharmaConnecte = toPharmacie(doc.data());
+                                });
+                                data.pharmaConnecte = pharmaConnecte;
+                              }
                               clearFields();
                               Navigator.pushReplacementNamed(
                                   context, '/StackProfilHome');

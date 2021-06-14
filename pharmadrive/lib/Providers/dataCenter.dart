@@ -66,16 +66,13 @@ class DataCenter extends ChangeNotifier {
   // *** Add sellected item to the list of items  ***//
 
   setItem(String drugName, String urlImage, int price, int index) {
-    if (!listItems.contains(SelectedItem(
-        nameDrug: drugName, urlImage: urlImage, price: price, index: index))) {
-      listItems.add(SelectedItem(
-        nameDrug: drugName,
-        urlImage: urlImage,
-        price: price,
-        index: index,
-      ));
-      notifyListeners();
-    }
+    listItems.add(SelectedItem(
+      nameDrug: drugName,
+      urlImage: urlImage,
+      price: price,
+      index: index,
+    ));
+    notifyListeners();
   }
 
   // *** fct get the value X axe ***//
@@ -123,8 +120,8 @@ class DataCenter extends ChangeNotifier {
     notifyListeners();
   }
 
-  setNewNbrSelectedDrug(index, value) {
-    listSelectedDrug[index] = value;
+  setNewNbrSelectedDrug(index,value) {
+    listSelectedDrug[index]=value;
     notifyListeners();
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmadrive/Global/SizeConfig.dart';
 import 'package:pharmadrive/Providers/dataCenter.dart';
+import 'package:pharmadrive/Screens/testSomme.dart';
 import 'package:provider/provider.dart';
 
 ValueNotifier sumItems = ValueNotifier(0);
@@ -90,7 +91,7 @@ class _BasketState extends State<Basket> {
                           valueListenable: sumItems,
                           builder: (context, value, widget) {
                             return Text(
-                              value.toString(),
+                              '${value.toString()} MAD',
                               style: TextStyle(
                                 fontSize: SizeConfig.blockSizeHorizontal * 6,
                                 fontWeight: FontWeight.w500,
@@ -112,7 +113,13 @@ class _BasketState extends State<Basket> {
                             borderRadius: BorderRadius.circular(28.0),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TestSomme(somme:sumItems.value)),
+                          );
+                        },
                         child: Text(
                           "Payer",
                           style: TextStyle(

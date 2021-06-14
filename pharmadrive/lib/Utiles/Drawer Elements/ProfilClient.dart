@@ -166,10 +166,11 @@ class ListButtons extends StatelessWidget {
             data.setActiveNvg(true);
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Basket(
-                listItems: data.getItems(),
-                listStateInfos: data.listPrices,
-              )),
+              MaterialPageRoute(
+                  builder: (context) => Basket(
+                        listItems: data.getItems(),
+                        listStateInfos: data.listPrices,
+                      )),
             );
           },
         ),
@@ -202,6 +203,8 @@ class ProfilInfos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DataCenter data = Provider.of<DataCenter>(context);
+
     return Row(
       children: [
         SizedBox(width: SizeConfig.safeBlockHorizontal * 7),
@@ -212,7 +215,9 @@ class ProfilInfos extends StatelessWidget {
             color: Colors.white,
             shape: BoxShape.circle,
             image: DecorationImage(
-              image: ExactAssetImage('assets/images/profil.png'),
+              image: data.utilisateurConnecte.imageUrl == null
+                  ? ExactAssetImage('assets/images/profil.png')
+                  : NetworkImage(data.utilisateurConnecte.imageUrl),
               fit: BoxFit.fill,
             ),
             boxShadow: [
@@ -231,7 +236,7 @@ class ProfilInfos extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(
-                'Cloud & IoT',
+                data.utilisateurConnecte.nomComplet,
                 style: TextStyle(
                   fontSize: SizeConfig.blockSizeHorizontal * 6,
                   fontFamily: "Rota",
@@ -240,7 +245,7 @@ class ProfilInfos extends StatelessWidget {
                 ),
               ),
               Text(
-                'INPT',
+                data.utilisateurConnecte.aPharma ? 'Pharmacien' : 'Client',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   fontFamily: "Rota",

@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:pharmadrive/Global/SizeConfig.dart';
 import 'package:pharmadrive/Providers/dataCenter.dart';
+import 'package:pharmadrive/Screens/pharmacieDeGuarde.dart';
 import 'package:pharmadrive/Utiles/TapPages/Home.dart';
 import 'package:pharmadrive/Utiles/TapPages/MapPharma.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +29,7 @@ class _MainNvgAppState extends State<MainNvgApp> {
   final _tabPages = <Widget>[
     Home(),
     MapPharma(),
-    Home(),
+    PharmacieDeGuarde(),
     Home(),
   ];
 

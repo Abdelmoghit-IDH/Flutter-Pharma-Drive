@@ -45,7 +45,7 @@ class CustomAppBar extends StatelessWidget {
             ],
           ),
         ),
-        Column(
+        /*Column(
           children: [
             SizedBox(height: SizeConfig.safeBlockVertical * 4.5),
             Row(
@@ -85,7 +85,7 @@ class CustomAppBar extends StatelessWidget {
               ],
             ),
           ],
-        )
+        )*/
       ],
     );
   }

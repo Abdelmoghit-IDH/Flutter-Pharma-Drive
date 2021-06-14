@@ -53,6 +53,14 @@ class WholeUserModel {
         .set(this.toMap());
     //return doc;
   }
+
+  Future pharmaUser() async {
+    await FirebaseFirestore.instance
+        .collection('utilisateur')
+        .doc(this.uid)
+        .update({'aPharma': true});
+    //.set(this.toMap());
+  }
 }
 
 WholeUserModel toWholeUserModel(Map<String, dynamic> userMap) {

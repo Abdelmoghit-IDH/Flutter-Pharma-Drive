@@ -1,10 +1,6 @@
 import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:intl/intl.dart';
-import 'package:path/path.dart' as Path;
 import 'package:pharmadrive/Providers/dataCenter.dart';
 import 'package:pharmadrive/model/user.dart';
 import 'package:provider/provider.dart';
@@ -185,34 +181,4 @@ class _JustificatifState extends State<Justificatif> {
       print(response.file);
     }
   }
-
-  /*Future uploadFile(String filename) async {
-    ref = firebase_storage.FirebaseStorage.instance
-        .ref()
-        .child('stations/$stationsName/${Path.basename(_imaage.path)}');
-    await ref.putFile(_imaage).whenComplete(() async {
-      var downurl = await ref.getDownloadURL();
-      var decodedImage = await decodeImageFromList(_imaage.readAsBytesSync());
-      await FileStorageService.loadImage(
-          stationsName,
-          downurl.toString(),
-          filename,
-          decodedImage.width.toDouble(),
-          decodedImage.height.toDouble());
-    });
-  }*/
 }
-/*
-class FileStorageService extends ChangeNotifier {
-  FileStorageService();
-  static Future<dynamic> loadImage(String stationName, String imageUrl,
-      String filename, double imageWidth, double imageHeight) async {
-    await FirebaseFirestore.instance.collection(stationName).add({
-      'date': DateFormat('yyyy-MM-dd HH:mm').format(DateTime.now()),
-      'imageUrl': imageUrl,
-      'title': filename,
-      'imageWidth': imageWidth,
-      'imageHeight': imageHeight,
-    });
-  }
-}*/

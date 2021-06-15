@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:pharmadrive/Providers/dataCenter.dart';
-import 'package:pharmadrive/model/user.dart';
-import 'package:pharmadrive/services/auth.dart';
 import 'package:path/path.dart' as Path;
 import 'package:provider/provider.dart';
 import 'package:pharmadrive/model/pharma.dart';
@@ -39,8 +37,6 @@ class _CreatePharmaState extends State<CreatePharma> {
   final passwordController = TextEditingController();
   bool _locationChoosen = false;
 
-  AuthController _authController = AuthController();
-
   bool isWaiting = false;
 
   toggleSpinner() {
@@ -59,7 +55,9 @@ class _CreatePharmaState extends State<CreatePharma> {
     //double height = MediaQuery.of(context).size.height;
     DataCenter data = Provider.of<DataCenter>(context);
     LocationData _locationData;
+    // ignore: unused_local_variable
     double lon;
+    // ignore: unused_local_variable
     double lat;
 
     return ModalProgressHUD(
@@ -242,7 +240,7 @@ class _CreatePharmaState extends State<CreatePharma> {
                             }
                             Pharmacie pharmacie = Pharmacie(
                                 imageUrl,
-                                data.utilisateurConnecte.uid,
+                                data.utilisateurConnecte.uid,  
                                 nameController.text,
                                 _locationData.longitude,
                                 _locationData.latitude);

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharmadrive/Providers/dataCenter.dart';
+import 'package:pharmadrive/Screens/createPharma.dart';
+import 'package:pharmadrive/Screens/monStock.dart';
 import 'package:pharmadrive/model/user.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -149,8 +151,17 @@ class _EditProfilState extends State<EditProfil> {
               ),
               TextButton(
                   onPressed: () async {
-                    Navigator.pushNamed(context,
-                        userFirebase.aPharma ? '/monStock' : '/createPharma');
+                    if (userFirebase.aPharma) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MonStock()),
+                      );
+                    } else {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CreatePharma()),
+                      );
+                    }
                   },
                   child: Container(
                     height: 50,

@@ -144,8 +144,6 @@ class SelectedItem extends StatefulWidget {
     @required this.nameDrug,
     @required this.price,
     this.urlImage,
-    this.isAddButtomsPressed,
-    this.numberofThisPressed,
     @required this.index,
     Key key,
   }) : super(key: key);
@@ -153,8 +151,6 @@ class SelectedItem extends StatefulWidget {
   final String nameDrug;
   final int price;
   final String urlImage;
-  final bool isAddButtomsPressed;
-  final int numberofThisPressed;
   final int index;
 
   @override

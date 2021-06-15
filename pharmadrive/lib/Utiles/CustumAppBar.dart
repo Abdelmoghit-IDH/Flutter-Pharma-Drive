@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pharmadrive/Global/SizeConfig.dart';
-import 'package:pharmadrive/Providers/dataCenter.dart';
-import 'package:provider/provider.dart';
 
 class CustomAppBar extends StatelessWidget {
   CustomAppBar({
@@ -22,7 +20,6 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DataCenter data = Provider.of<DataCenter>(context);
     return Stack(
       children: [
         Container(

@@ -8,6 +8,7 @@ import 'package:pharmadrive/Screens/justificatif.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'Providers/dataCenter.dart';
+import 'Screens/AddDrugs.dart';
 import 'Screens/Bienvenue.dart';
 import 'Screens/FindMedicament.dart';
 import 'Screens/MainNvgApp.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
           '/createPharma': (context) => CreatePharma(),
           '/Justificatif': (context) => Justificatif(),
           '/monStock': (context) => MonStock(),
+          '/AddDrugs': (context)=> AddDrugs(),
         },
       ),
     );

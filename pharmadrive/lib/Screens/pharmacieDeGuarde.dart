@@ -45,9 +45,9 @@ class _PharmacieDeGuardeState extends State<PharmacieDeGuarde> {
                 padding: EdgeInsets.all(8),
                 itemBuilder: (context, index) {
                   return Card(
-                    color: Colors.white, // Theme.of(context).cardColor, //TODO
+                    color: Colors.white, // Theme.of(context).cardColor,
                     shadowColor:
-                        Colors.black, //Theme.of(context).primaryColor, //TODO
+                        Colors.black, //Theme.of(context).primaryColor, 
                     elevation: 10,
                     child: ListTile(
                       leading: IconButton(
@@ -104,7 +104,7 @@ class _PharmacieDeGuardeState extends State<PharmacieDeGuarde> {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.grey,
-                                    fontWeight: FontWeight.normal), //TODO
+                                    fontWeight: FontWeight.normal),
                               ),
                             ],
                           ),

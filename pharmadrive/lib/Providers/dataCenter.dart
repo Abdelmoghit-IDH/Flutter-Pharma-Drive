@@ -8,6 +8,7 @@ class DataCenter extends ChangeNotifier {
   List<int> listPrices = [];
   int sumItems = 0;
   List<int> listSelectedDrug = [];
+  int sommeItems = 0;
   //***Initiale values of X,Y,Z axes***//
   double xOffsite = 0;
   double yOffsite = 0;
@@ -18,6 +19,15 @@ class DataCenter extends ChangeNotifier {
   bool state = false;
 
   // Todo : *******************Functions*********************
+
+  getSomme() {
+    return sommeItems;
+  }
+
+  setSommeItems(int value) {
+    sommeItems = value;
+    notifyListeners();
+  }
 
   // *** fct change the scale of MainNvgApp based in the state of drawer ***//
 
@@ -121,8 +131,8 @@ class DataCenter extends ChangeNotifier {
     notifyListeners();
   }
 
-  setNewNbrSelectedDrug(index,value) {
-    listSelectedDrug[index]=value;
+  setNewNbrSelectedDrug(index, value) {
+    listSelectedDrug[index] = value;
     notifyListeners();
   }
 

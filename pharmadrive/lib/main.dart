@@ -3,6 +3,7 @@ import 'package:pharmadrive/Screens/Loading.dart';
 import 'package:pharmadrive/Screens/createPharma.dart';
 import 'package:pharmadrive/Screens/logIn.dart';
 import 'package:pharmadrive/Screens/monStock.dart';
+import 'package:pharmadrive/Screens/shipping.dart';
 import 'package:pharmadrive/Screens/signUp.dart';
 import 'package:pharmadrive/Screens/justificatif.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
           '/Justificatif': (context) => Justificatif(),
           '/monStock': (context) => MonStock(),
           '/AddDrugs': (context)=> AddDrugs(),
+          '/Shipping':(context)=> Shipping(),
         },
       ),
     );

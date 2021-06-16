@@ -26,6 +26,7 @@ class Basket extends StatefulWidget {
 class _BasketState extends State<Basket> {
   @override
   Widget build(BuildContext context) {
+    DataCenter data = Provider.of<DataCenter>(context);
     return Scaffold(
       body: Column(
         children: [
@@ -114,11 +115,8 @@ class _BasketState extends State<Basket> {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TestSomme(somme:sumItems.value)),
-                          );
+                          Navigator.pushNamed(context, '/Shipping');
+                          data.setSommeItems(sumItems.value);
                         },
                         child: Text(
                           "Payer",

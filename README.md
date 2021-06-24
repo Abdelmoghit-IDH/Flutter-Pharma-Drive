@@ -1,4 +1,4 @@
-# Pharma-Drive
+# Pharmacy apps Flutter-Pharma-Drive
 This project is the result of the work that we carried out as part of our personal and professional development project at National Institute of Posts and Telecommunications Morocco. Its objective is to design and develop a mobile application concerning the management and delivery of medicines.
 Pharma’drive is an app that connects doctors, pharmacies and customers. It offers a home medication delivery service. This application is aimed at all types of people; those in rural isolation, people with mobile disabilities or more simply for people who can afford this service.
 The implementation of the application took place remotely using different tools, mainly: the Flutter Framework, Firebase, GitHub and Trello.

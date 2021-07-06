@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pharmadrive/Global/SizeConfig.dart';
 
 import 'Payment.dart';
 
@@ -11,7 +12,7 @@ class LaunchState extends State<ChooseMethodPayment> {
   int _value = 1;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    /*return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: GestureDetector(
@@ -135,6 +136,155 @@ class LaunchState extends State<ChooseMethodPayment> {
             },
           )
         ],
+      ),
+    );*/
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            ListTile(
+              leading: IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: Icon(
+                  Icons.arrow_back,
+                  size: SizeConfig.blockSizeHorizontal * 7,
+                ),
+                color: Color(0xff2b383a),
+              ),
+              title: Center(
+                child: Text(
+                  "Payment",
+                  style: TextStyle(
+                    fontFamily: "Rota",
+                    fontSize: SizeConfig.blockSizeHorizontal * 6,
+                    color: Color(0xff2b383a),
+                  ),
+                ),
+              ),
+              trailing: Icon(null),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Text(
+              "Choose your Payment Method",
+              style: TextStyle(
+                  fontSize: SizeConfig.blockSizeHorizontal * 6,
+                  fontWeight: FontWeight.bold),
+              textAlign: TextAlign.start,
+            ),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.all(24),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 80,
+                      ),
+                      Row(
+                        children: [
+                          Radio(
+                              activeColor: Color(0xffff8000),
+                              value: 1,
+                              groupValue: _value,
+                              onChanged: (value) {
+                                setState(() {
+                                  _value = value;
+                                });
+                              }),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Text("Credit/Debit Card"),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Radio(
+                              activeColor: Color(0xffff8000),
+                              value: 2,
+                              groupValue: _value,
+                              onChanged: (value) {
+                                setState(() {
+                                  _value = value;
+                                });
+                              }),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Text("Cash On Delivery"),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Radio(
+                              activeColor: Color(0xffff8000),
+                              value: 3,
+                              groupValue: _value,
+                              onChanged: (value) {
+                                setState(() {
+                                  _value = value;
+                                });
+                              }),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Text("PayPal"),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Radio(
+                              activeColor: Color(0xffff8000),
+                              value: 4,
+                              groupValue: _value,
+                              onChanged: (value) {
+                                setState(() {
+                                  _value = value;
+                                });
+                              }),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Text("Google Wallet"),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Center(
+              child: Container(
+                margin: EdgeInsets.all(15),
+                width: SizeConfig.blockSizeHorizontal * 80,
+                height: SizeConfig.blockSizeVertical * 6,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    primary: Colors.white,
+                    backgroundColor: Color(0xffff8000),
+                    onSurface: Colors.grey,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(28.0),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Payment()));
+                  },
+                  child: Text(
+                    'Pay',
+                    style: TextStyle(
+                      fontSize: SizeConfig.blockSizeHorizontal * 6,
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
